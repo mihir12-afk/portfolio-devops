@@ -1,4 +1,4 @@
-name: Auto-Deploy to VPS
+name: 🚀 Auto-Deploy to VPS
 
 on:
   push:
@@ -7,20 +7,23 @@ on:
 
 jobs:
   deploy:
+    name: 📦 Deploy to AlmaLinux VPS
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: ⏬ Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up SSH
+      - name: 🔐 Set up SSH key
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.VPS_PRIVATE_KEY }}
 
-      - name: Deploy to cPanel VPS (public_html)
+      - name: 📤 Deploy to VPS via rsync
         run: |
           rsync -avz --delete \
+            -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             --exclude=".git/" \
             --exclude=".github/" \
-            ./ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/mihir/public_html/
+            ./ \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/mihir/public_html/
