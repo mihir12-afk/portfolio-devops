@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mihir Savla – Blog</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style: none;
+    }
+
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --border-color: #475569;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent-green);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-green);
+    }
+
+    .home-btn {
+      margin: 100px 20px 20px 20px;
+      padding: 12px 24px;
+      background: var(--accent-green);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+
+    .blog-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      margin-top: 60px;
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .blog-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .blog-header p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .blogs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-amber));
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-green);
+    }
+
+    .project-card h3 {
+      font-size: 1.4rem;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-link {
+      color: var(--accent-green);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent-green);
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      background: var(--accent-green);
+      color: white;
+    }
+
+    .loading-card {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      border-top-color: var(--accent-green);
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error-card {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid #ef4444;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .error-card i {
+      font-size: 2rem;
+      color: #ef4444;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state {
+      background: var(--bg-secondary);
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: var(--accent-green);
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h3 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      color: var(--text-secondary);
+    }
+
+    @media screen and (max-width: 768px) {
+      .blog-container {
+        padding: 1rem;
+      }
+      
+      .blogs {
+        grid-template-columns: 1fr;
+      }
+
+      .home-btn {
+        margin: 80px 10px 20px 10px;
+      }
+
+      .blog-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">MS</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="resume.html">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <section class="blog-container">
+    <div class="blog-header">
+      <h1>My Blog</h1>
+      <p>Sharing insights, experiences, and learnings from my journey in Linux system administration and technology.</p>
+    </div>
+    <div id="blog-posts" class="blogs">
+      <div class="loading-card">
+        <div class="loading-spinner"></div>
+        Loading blog posts...
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const blogContainer = document.getElementById('blog-posts');
+
+    // Show loading state initially
+    function showLoading() {
+      blogContainer.innerHTML = `
+        <div class="loading-card">
+          <div class="loading-spinner"></div>
+          Loading blog posts...
+        </div>
+      `;
+    }
+
+    function showError() {
+      blogContainer.innerHTML = `
+        <div class="error-card">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>Unable to Load Blog Posts</h3>
+          <p>There was an issue connecting to the blog service. Please try again later.</p>
+        </div>
+      `;
+    }
+
+    function showEmptyState() {
+      blogContainer.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-pen-alt"></i>
+          <h3>Blog Coming Soon</h3>
+          <p>I'm working on creating valuable content about Linux system administration, troubleshooting, and technology insights. Stay tuned!</p>
+        </div>
+      `;
+    }
+
+    // Fetch blog posts from Hashnode
+    fetch("https://gql.hashnode.com/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        query: `
+          {
+            user(username: "mihirsavla") {
+              publications(first: 10) {
+                edges {
+                  node {
+                    posts(first: 5) {
+                      edges {
+                        node {
+                          title
+                          brief
+                          url
+                          publishedAt
+                          tags {
+                            name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `
+      })
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.json();
+    })
+    .then(data => {
+      // Clear loading state
+      blogContainer.innerHTML = '';
+      
+      let postCount = 0;
+      
+      if (data.data && data.data.user && data.data.user.publications.edges.length > 0) {
+        const publications = data.data.user.publications.edges;
+
+        publications.forEach(pub => {
+          const posts = pub.node.posts.edges;
+
+          posts.forEach(({ node: post }) => {
+            postCount++;
+            const postDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+
+            const postCard = document.createElement('div');
+            postCard.className = 'project-card';
+            postCard.innerHTML = `
+              <h3>${post.title}</h3>
+              <p>${post.brief || 'Click to read the full article and discover more insights.'}</p>
+              <div style="margin-bottom: 1rem;">
+                <small style="color: var(--text-muted);">
+                  <i class="fas fa-calendar-alt"></i> ${postDate}
+                </small>
+              </div>
+              <div class="project-links">
+                <a href="${post.url}" class="project-link" target="_blank" rel="noopener noreferrer">
+                  <i class="fas fa-external-link-alt"></i> Read Article
+                </a>
+              </div>
+            `;
+            blogContainer.appendChild(postCard);
+          });
+        });
+      }
+      
+      // If no posts found, show empty state
+      if (postCount === 0) {
+        showEmptyState();
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching blog posts:', error);
+      showError();
+    });
+  </script>
+
+</body>
+</html>

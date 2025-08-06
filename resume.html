@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mihir Savla - Resume</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-amber: #f59e0b;
+            --border-color: #475569;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 120px auto 60px;
+            padding: 0 2rem;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-amber));
+        }
+
+        .resume-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .resume-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            background: var(--accent-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), transparent);
+            margin-left: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .job-company {
+            color: var(--accent-green);
+            font-weight: 500;
+        }
+
+        .job-date {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .education-item {
+            margin-bottom: 1rem;
+        }
+
+        .education-degree {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .education-school {
+            color: var(--accent-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .education-grade {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        p, li {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            list-style-type: none;
+        }
+
+        ul li {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        ul li::before {
+            content: '▸';
+            color: var(--accent-green);
+            position: absolute;
+            left: -1.2rem;
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .highlight {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .award-item {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .award-item i {
+            font-size: 2rem;
+            color: var(--accent-amber);
+            margin-bottom: 1rem;
+        }
+
+        .award-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .award-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-item {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+        }
+
+        .cert-item i {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .cert-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .cert-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        .contact-item i {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+                margin: 100px auto 40px;
+            }
+
+            .resume-header h1 {
+                font-size: 2rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MS</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="resume.html">Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="resume-header">
+            <h1>Mihir Savla</h1>
+            <p>Linux & Server Administration Enthusiast | Product Support Associate</p>
+            <a href="Mihir-Savla-sysAdminResume.pdf" class="download-btn" download>
+                <i class="fas fa-download"></i>
+                Download Resume PDF
+            </a>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-user"></i> Professional Summary</h2>
+            <p>Linux & server administration enthusiast with hands-on experience across Newfold Digital's enterprise hosting
+            stack (Ubuntu, RHEL, CentOS, Alma, Rocky Linux). Strong background in technical troubleshooting, server
+            restoration, and web hosting, with a proven ability to maintain uptime, improve performance, and automate day-
+            to-day tasks. Seeking an opportunity as a Linux System Administrator to manage production infrastructure,
+            implement best practices, and strengthen operational efficiency.</p>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            <div class="job-header">
+                <div>
+                    <div class="job-title">Product Support Associate</div>
+                    <div class="job-company">Newfold Digital</div>
+                </div>
+                <div class="job-date">05/2023 – Present</div>
+            </div>
+            <ul>
+                <li>Managed and troubleshot Linux-based shared/VPS servers (primarily Ubuntu & cPanel-CentOS & AlmaLinux) via SSH for premium customers.</li>
+                <li>Performed server restorations, backups, and migrations with minimum downtime.</li>
+                <li>Diagnosed email deliverability issues, DNS misconfigurations, and SSL failures and implemented corrective measures.</li>
+                <li>Wrote basic Bash scripts to automate repetitive tasks and streamline support operations.</li>
+                <li>Analyzed logs (/var/log/maillog, /var/log/messages, Apache/Nginx) to resolve system-level hardware/software issues.</li>
+                <li>Collaborated closely with SysOps and Dev teams to deploy hotfixes and maintain hosting infrastructure stability.</li>
+                <li>Ensured servers adhered to security hardening, firewall policies, and best practices.</li>
+                <li>Maintained internal documentation (Confluence) and mentored new team members on Linux command-line usage.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="education-item">
+                <div class="education-degree">Bachelor of Science - B.Sc Information Technology</div>
+                <div class="education-school">Jai Hind College</div>
+                <div class="education-grade">Grade: 7.5 CGPI</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-cogs"></i> Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fab fa-linux"></i> Operating Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Ubuntu</span>
+                        <span class="skill-tag">RHEL</span>
+                        <span class="skill-tag">Rocky Linux</span>
+                        <span class="skill-tag">AlmaLinux</span>
+                        <span class="skill-tag">CentOS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-globe"></i> Web Protocols</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTTP/HTTPS</span>
+                        <span class="skill-tag">FTP</span>
+                        <span class="skill-tag">IMAP</span>
+                        <span class="skill-tag">POP</span>
+                        <span class="skill-tag">SMTP</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-network-wired"></i> Networking & Security</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">DNS</span>
+                        <span class="skill-tag">SSL</span>
+                        <span class="skill-tag">Proxy</span>
+                        <span class="skill-tag">VPN</span>
+                        <span class="skill-tag">Firewall</span>
+                        <span class="skill-tag">CSF</span>
+                    </div>
+                </div>
+                 <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Automation & Scripting</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">Shell Scripting</span>
+                        <span class="skill-tag">CLI Utilities (cron, rsync, grep, awk, sed)</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">WHM</span>
+                        <span class="skill-tag">cPanel</span>
+                        <span class="skill-tag">Salesforce</span>
+                        <span class="skill-tag">Zendesk</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Confluence</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-code-branch"></i> Version Control & DevOps</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Basic CI/CD</span>
+                        <span class="skill-tag">Infrastructure as Code (Basics)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-trophy"></i> Awards & Recognition</h2>
+            <div class="awards-grid">
+                <div class="award-item">
+                    <i class="fas fa-star"></i>
+                    <h3>MVP Award</h3>
+                    <p>May 2024</p>
+                </div>
+                <div class="award-item">
+                    <i class="fas fa-medal"></i>
+                    <h3>Manager’s Award</h3>
+                    <p>August 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-certificate"></i> Certifications</h2>
+            <div class="certifications-grid">
+                <a href="https://drive.google.com/file/d/1SbW7AazpRI8bD_8wJFC20CnXeVCS3kRz/view?usp=sharing" target="_blank" class="cert-item">
+                    <i class="fas fa-certificate"></i>
+                    <h3>CWSA-1</h3>
+                    <p>Certified Web Services Administrator – System Administrator I</p>
+                </a>
+                <a href="https://drive.google.com/file/d/1foHAvAEDMDyT6u8t0XfzB7eQ-fE69sie/view?usp=sharing" target="_blank" class="cert-item">
+                    <i class="fas fa-award"></i>
+                    <h3>CWSA-2</h3>
+                    <p>Certified Web Services Administrator – System Administrator II</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-envelope"></i> Contact Information</h2>
+            <div class="contact-grid">
+                <a href="mailto:savla.mihir10472@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i> savla.mihir10472@gmail.com
+                </a>
+                <a href="tel:+918850470935" class="contact-item">
+                    <i class="fas fa-phone"></i> +91 8850470935
+                </a>
+                <a href="https://linkedin.com/in/mihir-savla" target="_blank" class="contact-item">
+                    <i class="fab fa-linkedin"></i> linkedin.com/in/mihir-savla
+                </a>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i> Mumbai, India
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Mihir Savla. Built with passion for Linux & DevOps.</p>
+    </footer>
+</body>
+</html>
