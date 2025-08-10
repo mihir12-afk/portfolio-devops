@@ -404,12 +404,35 @@
                 font-size: 1.5rem;
             }
         }
-    </style>
+    
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        background: rgba(15, 23, 42, 0.98);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        display: none;
+        padding: 1rem 0;
+        z-index: 999;
+    }
+    .nav-links.show {
+        display: flex;
+    }
+    .nav-links li {
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+}
+
+</style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-container">
+            <button class="mobile-menu"><i class="fas fa-bars"></i></button>
             <a href="index.html" class="logo">MS</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -586,5 +609,13 @@
     <footer class="footer">
         <p>© 2025 Mihir Savla. Built with passion for Linux & DevOps.</p>
     </footer>
+<script>
+// Mobile menu toggle
+const mobileMenuBtn = document.querySelector('.mobile-menu');
+const navLinksEl = document.querySelector('.nav-links');
+mobileMenuBtn.addEventListener('click', () => {
+    navLinksEl.classList.toggle('show');
+});
+</script>
 </body>
 </html>

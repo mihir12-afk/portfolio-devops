@@ -278,13 +278,36 @@
         font-size: 2rem;
       }
     }
-  </style>
+  
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        background: rgba(15, 23, 42, 0.98);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        display: none;
+        padding: 1rem 0;
+        z-index: 999;
+    }
+    .nav-links.show {
+        display: flex;
+    }
+    .nav-links li {
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+}
+
+</style>
 </head>
 
 <body>
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
+      <button class="mobile-menu"><i class="fas fa-bars"></i></button>
       <a href="index.html" class="logo">MS</a>
       <div class="nav-links">
         <a href="index.html">Home</a>
@@ -354,7 +377,7 @@
               publications(first: 10) {
                 edges {
                   node {
-                    posts(first: 5) {
+                    posts(first: 10) {
                       edges {
                         node {
                           title
@@ -433,5 +456,13 @@
     });
   </script>
 
+<script>
+// Mobile menu toggle
+const mobileMenuBtn = document.querySelector('.mobile-menu');
+const navLinksEl = document.querySelector('.nav-links');
+mobileMenuBtn.addEventListener('click', () => {
+    navLinksEl.classList.toggle('show');
+});
+</script>
 </body>
 </html>
