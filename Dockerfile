@@ -1,12 +1,11 @@
-# Use minimal nginx image
+# Use official Nginx image
 FROM nginx:alpine
 
-# Clear default nginx content
+# Remove default website
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy portfolio site files to nginx html directory
+# Copy your website files to nginx html directory
 COPY . /usr/share/nginx/html
 
-EXPOSE 8080
-
-CMD ["nginx", "-g", "daemon off;"]
+# Expose port
+EXPOSE 80

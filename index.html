@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mihir Savla - Linux System Administrator</title>
+    <title>Mihir Savla - Systems Engineer & Linux Administrator</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -60,6 +60,7 @@
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--accent-green);
+            text-decoration: none;
         }
 
         .nav-links {
@@ -71,11 +72,16 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             font-weight: 500;
+            position: relative;
         }
 
         .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .nav-links a.active {
             color: var(--accent-green);
         }
 
@@ -98,6 +104,7 @@
             background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             position: relative;
             overflow: hidden;
+            padding-top: 80px;
         }
 
         .hero::before {
@@ -116,6 +123,18 @@
             padding: 2rem;
             position: relative;
             z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
@@ -169,6 +188,7 @@
         .btn-primary:hover {
             background: #059669;
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
         }
 
         .btn-secondary {
@@ -180,15 +200,14 @@
         .btn-secondary:hover {
             border-color: var(--accent-green);
             color: var(--accent-green);
+            transform: translateY(-2px);
         }
 
         /* Sections */
         .section {
-            padding: 5rem 0;
+            padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
         }
 
         .section-title {
@@ -220,7 +239,7 @@
         .about-image {
             width: 300px;
             height: 350px;
-            background: var(--bg-secondary);
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
             border-radius: 1rem;
             border: 2px solid var(--border-color);
             display: flex;
@@ -229,6 +248,12 @@
             font-size: 4rem;
             color: var(--accent-green);
             margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
         }
 
         .about-text {
@@ -259,12 +284,13 @@
             padding: 2rem;
             border-radius: 1rem;
             border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .skill-category:hover {
             transform: translateY(-5px);
             border-color: var(--accent-green);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
         }
 
         .skill-category h3 {
@@ -289,57 +315,12 @@
             border-radius: 2rem;
             font-size: 0.9rem;
             border: 1px solid var(--border-color);
-        }
-
-        /* Certifications Section */
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .certification-card {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 1rem;
-            border: 1px solid var(--border-color);
-            text-align: center;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
 
-        .certification-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-        }
-
-        .certification-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-green);
-        }
-
-        .certification-card .cert-icon {
-            font-size: 3rem;
-            color: var(--accent-green);
-            margin-bottom: 1rem;
-        }
-
-        .certification-card h3 {
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .certification-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        .skill-tag:hover {
+            background: var(--accent-green);
+            color: var(--bg-primary);
         }
 
         /* Projects Section */
@@ -352,13 +333,14 @@
 
         .project-card {
             background: var(--bg-secondary);
-            padding: 2rem;
             border-radius: 1rem;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            height: 100%;
+            transform-style: preserve-3d;
         }
 
         .project-card::before {
@@ -371,27 +353,26 @@
             background: linear-gradient(90deg, var(--accent-green), var(--accent-amber));
         }
 
-        .project-card:hover {
-            border-color: #6e5494; /* GitHub purple */
-            box-shadow: 0 4px 15px rgba(110, 84, 148, 0.4);
-            transform: translateY(-5px);
-            border-color: var(--accent-green);
+        .project-card-inner {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: all 0.6s ease;
+            transform-style: preserve-3d;
         }
 
-        .project-card:hover .fab.fa-github {
-            color: #6e5494;
-        }
-
-        .project-card h3 {
+        .project-card-front h3 {
             color: var(--text-primary);
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
 
-        .project-card p {
+        .project-card-front p {
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.6;
+            flex: 1;
         }
 
         .project-tech {
@@ -413,6 +394,7 @@
         .project-links {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .project-link {
@@ -422,11 +404,101 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent-green);
+            border-radius: 6px;
         }
 
         .project-link:hover {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        .reviews-carousel {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: var(--bg-tertiary);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            width: 100%;
+        }
+
+        .review-card.active {
+            opacity: 1;
+            position: static;
+        }
+
+        .review-card .stars {
             color: var(--accent-amber);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            font-style: italic;
+        }
+
+        .review-card .author {
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .review-card .role {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-btn {
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .carousel-btn:hover {
+            background: #059669;
+            transform: scale(1.1);
         }
 
         /* Contact Section */
@@ -450,11 +522,12 @@
             gap: 0.5rem;
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .contact-item:hover {
             color: var(--accent-green);
+            transform: translateY(-2px);
         }
 
         .social-links {
@@ -462,6 +535,7 @@
             justify-content: center;
             gap: 1rem;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
         .social-link {
@@ -487,7 +561,7 @@
         /* Footer */
         .footer {
             background: var(--bg-secondary);
-            padding: 2rem 0;
+            padding: 2rem;
             text-align: center;
             border-top: 1px solid var(--border-color);
         }
@@ -499,44 +573,66 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
+                flex-direction: column;
+                background: rgba(15, 23, 42, 0.98);
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
                 display: none;
+                padding: 1rem 0;
+                z-index: 999;
             }
-            
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li {
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+
             .mobile-menu {
                 display: block;
             }
-            
+
             .about-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            
+
             .hero h1 {
                 font-size: 2.5rem;
             }
-            
+
             .section {
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding: 3rem 1rem;
             }
-            
+
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .contact-info {
                 flex-direction: column;
                 gap: 1rem;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Animation Classes */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -547,44 +643,21 @@
             opacity: 1;
             transform: translateY(0);
         }
-    
-@media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column;
-        background: rgba(15, 23, 42, 0.98);
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 100%;
-        display: none;
-        padding: 1rem 0;
-        z-index: 999;
-    }
-    .nav-links.show {
-        display: flex;
-    }
-    .nav-links li {
-        text-align: center;
-        padding: 0.5rem 0;
-    }
-}
-
-</style>
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">MS</div>
+            <a href="index.html" class="logo">MS</a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="resume.html">Resume</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="resume.html" class="nav-link">Resume</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <button class="mobile-menu">
                 <i class="fas fa-bars"></i>
@@ -596,10 +669,9 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Mihir Savla</h1>
-            <p class="subtitle">Linux & Server Administration <span class="typing-text">Enthusiast</span></p>
+            <p class="subtitle">Systems Engineer <span class="typing-text">Specialist</span></p>
             <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
-                Linux & server administration enthusiast with hands-on experience across Newfold Digital's enterprise hosting
-                stack. Strong background in technical troubleshooting, server restoration, and web hosting with expertise in Ubuntu, RHEL, CentOS, Alma, and Rocky Linux.
+                3+ years of experience managing large-scale Linux environments, designing resilient infrastructure, and automating operations. Expertise in Nginx, MySQL, Grafana/Prometheus, and full-stack performance tuning.
             </p>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-primary">
@@ -610,7 +682,7 @@
                     <i class="fas fa-file-alt"></i>
                     View Resume
                 </a>
-                            <a href="blog.html" class="btn btn-secondary">
+                <a href="blog.html" class="btn btn-secondary">
                     <i class="fas fa-pen"></i>
                     Read Blog
                 </a>
@@ -619,7 +691,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
+    <section id="about" class="section fade-in">
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
             <div class="about-image">
@@ -627,191 +699,199 @@
             </div>
             <div class="about-text">
                 <p>
-                    I'm <span class="highlight">Mihir Savla</span>, a Linux & server administration enthusiast with hands-on 
-                    experience across enterprise hosting environments. Currently working as a Product Support Associate at 
-                    <span class="highlight">Newfold Digital</span> since May 2023, where I manage and troubleshoot Linux-based 
-                    shared/VPS servers for premium customers.
+                    I'm <span class="highlight">Mihir Savla</span>, a Systems Engineer with 3+ years of hands-on experience 
+                    managing <span class="highlight">large-scale Linux environments</span> across multiple global data centers.
                 </p>
                 <p>
-                    My expertise includes <span class="highlight">Ubuntu, RHEL, CentOS, AlmaLinux, and Rocky Linux</span> 
-                    administration via SSH, performing server restorations and migrations with minimum downtime. I specialize in 
-                    diagnosing complex issues including <span class="highlight">email deliverability problems</span>, 
-                    <span class="highlight">DNS misconfigurations</span>, and <span class="highlight">SSL failures</span>.
+                    At <span class="highlight">Redswitches</span>, I manage 200+ Linux servers (RHEL, Ubuntu, AlmaLinux) achieving 
+                    <span class="highlight">99.9% uptime</span>, design resilient Nginx and MySQL setups, and implement proactive 
+                    monitoring with <span class="highlight">Grafana/Prometheus</span>.
                 </p>
                 <p>
-                    I'm passionate about <span class="highlight">automation</span> and have written Bash scripts to streamline 
-                    support operations. I work closely with SysOps and Dev teams to deploy hotfixes and maintain hosting 
-                    infrastructure stability while ensuring servers adhere to security hardening and firewall policies.
+                    My expertise spans <span class="highlight">hardware/software RAID</span>, full-stack performance tuning 
+                    (kernel, networking, filesystem), <span class="highlight">Bash and Ansible</span> automation, and debugging 
+                    PHP-based applications. I'm passionate about <span class="highlight">operational excellence</span>, 
+                    open-source technologies, and improving developer productivity.
                 </p>
-                            <!-- <a href="blog.html" class="btn btn-secondary">
-                    <i class="fas fa-pen"></i>
-                    Read Blog
-                </a> -->
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
+    <section id="skills" class="section fade-in">
         <h2 class="section-title">Skills & Technologies</h2>
         <div class="skills-grid">
             <div class="skill-category">
                 <h3><i class="fab fa-linux"></i> Operating Systems</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">Ubuntu</span>
                     <span class="skill-tag">RHEL</span>
-                    <span class="skill-tag">Rocky Linux</span>
+                    <span class="skill-tag">Ubuntu</span>
                     <span class="skill-tag">AlmaLinux</span>
                     <span class="skill-tag">CentOS</span>
+                    <span class="skill-tag">Rocky Linux</span>
                 </div>
             </div>
             <div class="skill-category">
-                <h3><i class="fas fa-server"></i> Server Administration</h3>
+                <h3><i class="fas fa-server"></i> Infrastructure & Web Services</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">SSH</span>
-                    <span class="skill-tag">Command-line Tools</span>
-                    <span class="skill-tag">Firewall (iptables/firewalld/csf)</span>
-                    <span class="skill-tag">System Monitoring</span>
-                    <span class="skill-tag">Data Migration</span>
-                    <span class="skill-tag">Server Restoration</span>
+                    <span class="skill-tag">Nginx</span>
+                    <span class="skill-tag">Apache</span>
+                    <span class="skill-tag">MySQL/MariaDB</span>
+                    <span class="skill-tag">RAID Controllers</span>
+                    <span class="skill-tag">DNS/SSL/TLS</span>
+                    <span class="skill-tag">PHP</span>
                 </div>
             </div>
             <div class="skill-category">
-                <h3><i class="fas fa-network-wired"></i> Web Protocols & Networking</h3>
+                <h3><i class="fas fa-network-wired"></i> Networking & OS Tuning</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">HTTP/HTTPS</span>
-                    <span class="skill-tag">FTP</span>
-                    <span class="skill-tag">IMAP/POP</span>
-                    <span class="skill-tag">SMTP</span>
-                    <span class="skill-tag">DNS</span>
-                    <span class="skill-tag">SSL</span>
-                    <span class="skill-tag">Proxy</span>
-                    <span class="skill-tag">VPN</span>
+                    <span class="skill-tag">TCP/IP</span>
+                    <span class="skill-tag">Firewalls</span>
+                    <span class="skill-tag">Systemd</span>
+                    <span class="skill-tag">Kernel Tuning</span>
+                    <span class="skill-tag">Memory Management</span>
                 </div>
             </div>
             <div class="skill-category">
-                <h3><i class="fas fa-code"></i> Automation & Scripting</h3>
+                <h3><i class="fas fa-code"></i> Automation & CI/CD</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">Bash/Shell</span>
-                    <span class="skill-tag">CLI Utilities (cron, rsync, grep, awk, sed)</span>
-                    <span class="skill-tag">HTML</span>
-                    <span class="skill-tag">CSS</span>
-                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Ansible</span>
+                    <span class="skill-tag">Bash</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Jenkins</span>
+                    <span class="skill-tag">GitHub Actions</span>
                 </div>
-                            <!-- <a href="blog.html" class="btn btn-secondary">
-                    <i class="fas fa-pen"></i>
-                    Read Blog
-                </a> -->
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-line"></i> Monitoring & Observability</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Grafana</span>
+                    <span class="skill-tag">Prometheus</span>
+                    <span class="skill-tag">Datadog</span>
+                    <span class="skill-tag">Splunk</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Tools & DevOps</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">cPanel/WHM</span>
+                    <span class="skill-tag">RCA</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Certifications Section -->
- <section id="certifications" class="section">
-    <h2 class="section-title">Certifications</h2>
-    <div class="certifications-grid">
-        
-        <!-- CWSA-1 -->
-        <a href="https://drive.google.com/file/d/1SbW7AazpRI8bD_8wJFC20CnXeVCS3kRz/view?usp=sharing"
-           class="certification-card"
-           target="_blank"
-           style="text-decoration: none; color: inherit;">
-            <div class="cert-icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <h3>CWSA-1</h3>
-            <p>Certified Web Services Administrator<br>System Administrator I</p>
-        </a>
-        
-        <!-- CWSA-2 -->
-        <a href="https://drive.google.com/file/d/1foHAvAEDMDyT6u8t0XfzB7eQ-fE69sie/view?usp=sharing"
-           class="certification-card"
-           target="_blank"
-           style="text-decoration: none; color: inherit;">
-            <div class="cert-icon">
-                <i class="fas fa-award"></i>
-            </div>
-            <h3>CWSA-2</h3>
-            <p>Certified Web Services Administrator<br>System Administrator II</p>
-        </a>
-    </div>
-</section>
-
-
     <!-- Projects Section -->
-    <section id="projects" class="section">
+    <section id="projects" class="section fade-in">
         <h2 class="section-title">Learning Projects</h2>
         <div class="projects-grid">
-            <div class="project-card" onclick="window.open('https://github.com/mihir12-afk/server-admin-bash-scripts.git','_blank')" title="View on GitHub" style="cursor: pointer;">
-                <h3>Server Automation Scripts</h3>
-                <p>Collection of Bash scripts for automating server maintenance tasks, including log rotation, backup processes, and system health monitoring. Developed to streamline daily operations.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">Bash</span>
-                    <span class="tech-tag">Linux</span>
-                    <span class="tech-tag">Automation</span>
-                    <span class="tech-tag">Cron</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">
-                        <i class="fab fa-github"></i>
-                        GitHub
-                    </a>
-                </div>
-            </div>
-            
-            <div class="project-card" onclick="window.open('https://mihirsavla.com','_blank')" style="cursor: pointer;">
-                <h3>Professional Portfolio</h3>
-                <p>This responsive portfolio website showcasing my technical skills and experience. Built with modern HTML/CSS and JavaScript, demonstrating clean code practices and responsive design.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">HTML/CSS</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Responsive Design</span>
-                    <span class="tech-tag">Git</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">
-                        <i class="fab fa-github"></i>
-                        GitHub
-                    </a>
-                    <a href="#" class="project-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        Live Demo
-                    </a>
+            <div class="project-card">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <h3>Monitoring Stack (Grafana + Prometheus)</h3>
+                        <p>Installed and configured Prometheus to collect system metrics. Created comprehensive Grafana dashboards for CPU, memory, and Apache monitoring with real-time alerts.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Prometheus</span>
+                            <span class="tech-tag">Grafana</span>
+                            <span class="tech-tag">Monitoring</span>
+                            <span class="tech-tag">Metrics</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="project-card" onclick="window.open('https://maillogs.hashnode.dev/','_blank')" style="cursor:pointer;">
-                <h3>System Troubleshooting Guide</h3>
-                <p>Comprehensive documentation of common Linux server, DNS, and email configuration issues encountered in production environments, with detailed resolution procedures and preventive measures.</p>
-                <div class="project-tech">
-                    <span class="tech-tag">Documentation</span>
-                    <span class="tech-tag">Linux</span>
-                    <span class="tech-tag">DNS</span>
-                    <span class="tech-tag">Email Systems</span>
+
+            <div class="project-card">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <h3>Portfolio Website Deployment</h3>
+                        <p>Designed and deployed responsive portfolio website on VPS with automated SSL renewals and DNS configuration. Implemented CI/CD pipelines for seamless deployments.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">VPS</span>
+                            <span class="tech-tag">SSL/TLS</span>
+                            <span class="tech-tag">DNS</span>
+                            <span class="tech-tag">Git</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://mihirsavla.com" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Site
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="#" class="project-link">
-                        <i class="fab fa-github"></i>
-                        Hashnode
-                    </a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <h3>Automation with Bash & Ansible</h3>
+                        <p>Developed Bash scripts for disk usage monitoring with automated email alerts. Built comprehensive Ansible playbooks to automate Apache service management on WHM VPS.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Bash</span>
+                            <span class="tech-tag">Ansible</span>
+                            <span class="tech-tag">Automation</span>
+                            <span class="tech-tag">Apache</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Details
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                            <!-- <a href="blog.html" class="btn btn-secondary">
-                    <i class="fas fa-pen"></i>
-                    Read Blog
-                </a> -->
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+            <h3 style="text-align: center; margin-bottom: 2rem; color: var(--accent-green);">Recognition & Feedback</h3>
+            <div class="reviews-carousel">
+                <div class="review-card active">
+                    <div class="stars">★★★★★</div>
+                    <p>"Exceptional technical expertise and problem-solving abilities. Mihir consistently delivers high-quality solutions and demonstrates strong leadership skills."</p>
+                    <div class="author">Senior Management</div>
+                    <div class="role">Redswitches</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Reliable, knowledgeable, and always willing to help. Mihir's automation scripts have significantly improved team efficiency and operational stability."</p>
+                    <div class="author">DevOps Team</div>
+                    <div class="role">Redswitches</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Outstanding support and dedication to customer success. Mihir's proactive approach to system optimization has reduced our downtime significantly."</p>
+                    <div class="author">Enterprise Client</div>
+                    <div class="role">VPS Customer</div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="prevReview()"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn" onclick="nextReview()"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
+    <section id="contact" class="section fade-in">
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-content">
             <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
-                I'm passionate about Linux system administration and always open to discussing new opportunities, 
-                sharing knowledge, or collaborating on interesting projects. Let's connect!
+                I'm passionate about infrastructure engineering and always open to discussing new opportunities, 
+                collaborating on interesting projects, or sharing knowledge about Linux systems and DevOps.
             </p>
-            
+
             <div class="contact-info">
                 <a href="mailto:savla.mihir10472@gmail.com" class="contact-item">
                     <i class="fas fa-envelope"></i>
@@ -826,31 +906,42 @@
                     Mumbai, India
                 </span>
             </div>
-            
+
             <div class="social-links">
-                <a href="https://linkedin.com/in/mihir-savla" class="social-link" target="_blank">
+                <a href="https://linkedin.com/in/mihir-savla" class="social-link" target="_blank" title="LinkedIn">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://github.com/mihirsavla" class="social-link" target="_blank">
+                <a href="https://github.com/mihirsavla" class="social-link" target="_blank" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="mailto:savla.mihir10472@gmail.com" class="social-link">
+                <a href="mailto:savla.mihir10472@gmail.com" class="social-link" title="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
-                            <!-- <a href="blog.html" class="btn btn-secondary">
-                    <i class="fas fa-pen"></i>
-                    Read Blog
-                </a> -->
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 Mihir Savla. Built with passion for Linux & Server Administration.</p>
+        <p>&copy; 2025 Mihir Savla. Built with passion for infrastructure engineering and open-source technologies.</p>
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('show');
+            });
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -865,16 +956,37 @@
             });
         });
 
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
         // Typing effect for hero section
         const typingText = document.querySelector('.typing-text');
-        const texts = ['Enthusiast', 'Professional', 'Expert', 'Specialist'];
+        const texts = ['Specialist', 'Professional', 'Expert', 'Architect'];
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
 
         function typeEffect() {
             const currentText = texts[textIndex];
-            
+
             if (isDeleting) {
                 typingText.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
@@ -897,7 +1009,6 @@
             setTimeout(typeEffect, speed);
         }
 
-        // Start typing effect
         typeEffect();
 
         // Fade in animation on scroll
@@ -914,19 +1025,8 @@
             });
         }, observerOptions);
 
-        // Add fade-in class to elements and observe them
-        document.querySelectorAll('.section').forEach(section => {
-            section.classList.add('fade-in');
-            observer.observe(section);
-        });
-
-        // Mobile menu toggle
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
         });
 
         // Navbar scroll effect
@@ -938,6 +1038,27 @@
                 navbar.style.background = 'rgba(15, 23, 42, 0.95)';
             }
         });
+
+        // Review carousel functionality
+        let currentReview = 0;
+        const reviews = document.querySelectorAll('.review-card');
+
+        function showReview(n) {
+            reviews[currentReview].classList.remove('active');
+            currentReview = (n + reviews.length) % reviews.length;
+            reviews[currentReview].classList.add('active');
+        }
+
+        function nextReview() {
+            showReview(currentReview + 1);
+        }
+
+        function prevReview() {
+            showReview(currentReview - 1);
+        }
+
+        // Auto-advance carousel every 5 seconds
+        setInterval(nextReview, 5000);
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mihir Savla - Resume</title>
+    <title>Mihir Savla - Resume | Systems Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -38,6 +38,7 @@
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -67,11 +68,21 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-green);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
             color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         .container {
@@ -89,6 +100,18 @@
             border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .resume-header::before {
@@ -127,11 +150,14 @@
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .download-btn:hover {
             background: #059669;
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
         }
 
         h2 {
@@ -157,6 +183,24 @@
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
         }
 
         .job-header {
@@ -186,7 +230,7 @@
         }
 
         .education-item {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .education-degree {
@@ -218,7 +262,7 @@
 
         ul li {
             position: relative;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
         }
 
         ul li::before {
@@ -240,6 +284,12 @@
             padding: 1.5rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-2px);
         }
 
         .skill-category h3 {
@@ -259,10 +309,16 @@
         .skill-tag {
             background: var(--bg-primary);
             color: var(--text-primary);
-            padding: 0.25rem 0.75rem;
+            padding: 0.35rem 0.75rem;
             border-radius: 1rem;
             font-size: 0.85rem;
             border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-green);
+            color: var(--bg-primary);
         }
 
         .highlight {
@@ -282,6 +338,12 @@
             border-radius: 8px;
             border: 1px solid var(--border-color);
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .award-item:hover {
+            border-color: var(--accent-amber);
+            transform: translateY(-2px);
         }
 
         .award-item i {
@@ -314,6 +376,8 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .cert-item::before {
@@ -324,6 +388,12 @@
             right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+        }
+
+        .cert-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-green);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.1);
         }
 
         .cert-item i {
@@ -382,6 +452,31 @@
         }
 
         @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                background: rgba(15, 23, 42, 0.98);
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                display: none;
+                padding: 1rem 0;
+                z-index: 999;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links li {
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
             .container {
                 padding: 0 1rem;
                 margin: 100px auto 40px;
@@ -391,11 +486,6 @@
                 font-size: 2rem;
             }
 
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             .skills-grid {
                 grid-template-columns: 1fr;
             }
@@ -403,30 +493,17 @@
             h2 {
                 font-size: 1.5rem;
             }
-        }
-    
-@media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column;
-        background: rgba(15, 23, 42, 0.98);
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 100%;
-        display: none;
-        padding: 1rem 0;
-        z-index: 999;
-    }
-    .nav-links.show {
-        display: flex;
-    }
-    .nav-links li {
-        text-align: center;
-        padding: 0.5rem 0;
-    }
-}
 
-</style>
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
 
@@ -437,7 +514,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="resume.html">Resume</a></li>
+                <li><a href="resume.html" class="active">Resume</a></li>
             </ul>
         </div>
     </nav>
@@ -445,40 +522,57 @@
     <div class="container">
         <div class="resume-header">
             <h1>Mihir Savla</h1>
-            <p>Linux & Server Administration Enthusiast | Product Support Associate</p>
-            <a href="Mihir-Savla-sysAdminResume.pdf" class="download-btn" download>
+            <p>Systems Engineer | Infrastructure & DevOps Specialist</p>
+            <a href="Mihir-Savla-resume.pdf" class="download-btn" download>
                 <i class="fas fa-download"></i>
                 Download Resume PDF
             </a>
+
         </div>
 
         <div class="section">
             <h2><i class="fas fa-user"></i> Professional Summary</h2>
-            <p>Linux & server administration enthusiast with hands-on experience across Newfold Digital's enterprise hosting
-            stack (Ubuntu, RHEL, CentOS, Alma, Rocky Linux). Strong background in technical troubleshooting, server
-            restoration, and web hosting, with a proven ability to maintain uptime, improve performance, and automate day-
-            to-day tasks. Seeking an opportunity as a Linux System Administrator to manage production infrastructure,
-            implement best practices, and strengthen operational efficiency.</p>
+            <p>
+                Systems Engineer with 3+ years of experience managing large-scale Linux environments, optimizing uptime, and automating infrastructure operations. 
+                Skilled in designing resilient Nginx and MySQL setups, hardware/software RAID using RAID controllers, and full-stack performance tuning (kernel, networking, filesystem). 
+                Adept at debugging PHP-based applications, implementing proactive monitoring with Grafana/Prometheus, and building automation workflows with Bash and Ansible. 
+                Passionate about open-source technologies, operational excellence, and improving developer productivity across distributed environments.
+            </p>
         </div>
 
         <div class="section">
             <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            
+            <div class="job-header">
+                <div>
+                    <div class="job-title">Systems Engineer</div>
+                    <div class="job-company">Redswitches</div>
+                </div>
+                <div class="job-date">09/2025 – Present</div>
+            </div>
+            <ul>
+                <li>Managed 200+ Linux servers (RHEL, Ubuntu, AlmaLinux) across multiple global data centers, achieving 99.9% uptime.</li>
+                <li>Designed and maintained hardware/software RAID arrays via RAID controllers to ensure fault tolerance and data integrity.</li>
+                <li>Configured and tuned Nginx reverse proxies and load balancers for high-traffic workloads, improving request handling efficiency.</li>
+                <li>Automated patch management and monitoring workflows using Ansible and Bash, reducing manual effort by 40%.</li>
+                <li>Led root cause analysis (RCA) on system outages and implemented preventive measures.</li>
+                <li>Integrated Grafana + Prometheus dashboards for observability and capacity planning.</li>
+                <li>Partnered with DevOps teams to streamline deployments and CI/CD pipelines (Jenkins, GitHub Actions).</li>
+            </ul>
+
+            <br>
             <div class="job-header">
                 <div>
                     <div class="job-title">Product Support Associate</div>
                     <div class="job-company">Newfold Digital</div>
                 </div>
-                <div class="job-date">05/2023 – Present</div>
+                <div class="job-date">05/2023 – 08/2025</div>
             </div>
             <ul>
-                <li>Managed and troubleshot Linux-based shared/VPS servers (primarily Ubuntu & cPanel-CentOS & AlmaLinux) via SSH for premium customers.</li>
-                <li>Performed server restorations, backups, and migrations with minimum downtime.</li>
-                <li>Diagnosed email deliverability issues, DNS misconfigurations, and SSL failures and implemented corrective measures.</li>
-                <li>Wrote basic Bash scripts to automate repetitive tasks and streamline support operations.</li>
-                <li>Analyzed logs (/var/log/maillog, /var/log/messages, Apache/Nginx) to resolve system-level hardware/software issues.</li>
-                <li>Collaborated closely with SysOps and Dev teams to deploy hotfixes and maintain hosting infrastructure stability.</li>
-                <li>Ensured servers adhered to security hardening, firewall policies, and best practices.</li>
-                <li>Maintained internal documentation (Confluence) and mentored new team members on Linux command-line usage.</li>
+                <li>Supported enterprise VPS environments (WHM/cPanel), troubleshooting PHP, Apache, MySQL, DNS, SSL, and email delivery issues.</li>
+                <li>Tuned MySQL and Apache configurations to resolve performance bottlenecks.</li>
+                <li>Hardened Linux servers via CSF, iptables, and proactive patching.</li>
+                <li>Assisted in automated backup and recovery processes ensuring zero data loss across VPS clusters.</li>
             </ul>
         </div>
 
@@ -487,7 +581,7 @@
             <div class="education-item">
                 <div class="education-degree">Bachelor of Science - B.Sc Information Technology</div>
                 <div class="education-school">Jai Hind College</div>
-                <div class="education-grade">Grade: 7.5 CGPI</div>
+                <div class="education-grade">CGPA: 7.5</div>
             </div>
         </div>
 
@@ -497,76 +591,61 @@
                 <div class="skill-category">
                     <h3><i class="fab fa-linux"></i> Operating Systems</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Ubuntu</span>
                         <span class="skill-tag">RHEL</span>
-                        <span class="skill-tag">Rocky Linux</span>
+                        <span class="skill-tag">Ubuntu</span>
                         <span class="skill-tag">AlmaLinux</span>
                         <span class="skill-tag">CentOS</span>
+                        <span class="skill-tag">Rocky Linux</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-globe"></i> Web Protocols</h3>
+                    <h3><i class="fas fa-globe"></i> Web Services</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">HTTP/HTTPS</span>
-                        <span class="skill-tag">FTP</span>
-                        <span class="skill-tag">IMAP</span>
-                        <span class="skill-tag">POP</span>
-                        <span class="skill-tag">SMTP</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-network-wired"></i> Networking & Security</h3>
-                    <div class="skill-tags">
+                        <span class="skill-tag">Nginx</span>
+                        <span class="skill-tag">Apache</span>
+                        <span class="skill-tag">MySQL/MariaDB</span>
+                        <span class="skill-tag">PHP</span>
                         <span class="skill-tag">DNS</span>
-                        <span class="skill-tag">SSL</span>
-                        <span class="skill-tag">Proxy</span>
-                        <span class="skill-tag">VPN</span>
-                        <span class="skill-tag">Firewall</span>
-                        <span class="skill-tag">CSF</span>
+                        <span class="skill-tag">SSL/TLS</span>
                     </div>
                 </div>
-                 <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Automation & Scripting</h3>
+                <div class="skill-category">
+                    <h3><i class="fas fa-network-wired"></i> Networking & OS</h3>
                     <div class="skill-tags">
+                        <span class="skill-tag">TCP/IP</span>
+                        <span class="skill-tag">Firewalls</span>
+                        <span class="skill-tag">Systemd</span>
+                        <span class="skill-tag">Kernel Tuning</span>
+                        <span class="skill-tag">Memory Management</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Automation & CI/CD</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Ansible</span>
                         <span class="skill-tag">Bash</span>
-                        <span class="skill-tag">Shell Scripting</span>
-                        <span class="skill-tag">CLI Utilities (cron, rsync, grep, awk, sed)</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">GitHub Actions</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+                    <h3><i class="fas fa-chart-line"></i> Monitoring</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">WHM</span>
-                        <span class="skill-tag">cPanel</span>
-                        <span class="skill-tag">Salesforce</span>
-                        <span class="skill-tag">Zendesk</span>
-                        <span class="skill-tag">Jira</span>
-                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Datadog</span>
+                        <span class="skill-tag">Splunk</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-code-branch"></i> Version Control & DevOps</h3>
+                    <h3><i class="fas fa-tools"></i> Infrastructure</h3>
                     <div class="skill-tags">
+                        <span class="skill-tag">RAID</span>
+                        <span class="skill-tag">Load Balancing</span>
+                        <span class="skill-tag">cPanel/WHM</span>
                         <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Basic CI/CD</span>
-                        <span class="skill-tag">Infrastructure as Code (Basics)</span>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2><i class="fas fa-trophy"></i> Awards & Recognition</h2>
-            <div class="awards-grid">
-                <div class="award-item">
-                    <i class="fas fa-star"></i>
-                    <h3>MVP Award</h3>
-                    <p>May 2024</p>
-                </div>
-                <div class="award-item">
-                    <i class="fas fa-medal"></i>
-                    <h3>Manager’s Award</h3>
-                    <p>August 2024</p>
                 </div>
             </div>
         </div>
@@ -584,6 +663,35 @@
                     <h3>CWSA-2</h3>
                     <p>Certified Web Services Administrator – System Administrator II</p>
                 </a>
+                <div class="cert-item">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Oracle Cloud</h3>
+                    <p>Oracle Cloud Infrastructure 2025 Foundations Associate (1Z0-1085-25)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-lightbulb"></i> Learning Projects</h2>
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="border-left: 4px solid var(--accent-green); padding-left: 1.5rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">Monitoring Stack (Grafana + Prometheus)</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Installed and configured Prometheus to collect system metrics. Created Grafana dashboards for CPU, memory, and Apache monitoring with alerts.
+                    </p>
+                </div>
+                <div style="border-left: 4px solid var(--accent-green); padding-left: 1.5rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">Portfolio Website Deployment</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Designed and deployed portfolio website (mihirsavla.com) on VPS. Automated SSL renewals and DNS configuration.
+                    </p>
+                </div>
+                <div style="border-left: 4px solid var(--accent-green); padding-left: 1.5rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">Automation with Bash & Ansible</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Wrote Bash scripts for disk usage monitoring + automated email alerts. Built an Ansible playbook to automate Apache (httpd) service management on WHM VPS.
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -591,31 +699,66 @@
             <h2><i class="fas fa-envelope"></i> Contact Information</h2>
             <div class="contact-grid">
                 <a href="mailto:savla.mihir10472@gmail.com" class="contact-item">
-                    <i class="fas fa-envelope"></i> savla.mihir10472@gmail.com
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        <p style="font-size: 0.9rem; margin: 0;">savla.mihir10472@gmail.com</p>
+                    </div>
                 </a>
                 <a href="tel:+918850470935" class="contact-item">
-                    <i class="fas fa-phone"></i> +91 8850470935
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Phone</strong>
+                        <p style="font-size: 0.9rem; margin: 0;">+91 8850470935</p>
+                    </div>
                 </a>
                 <a href="https://linkedin.com/in/mihir-savla" target="_blank" class="contact-item">
-                    <i class="fab fa-linkedin"></i> linkedin.com/in/mihir-savla
+                    <i class="fab fa-linkedin"></i>
+                    <div>
+                        <strong>LinkedIn</strong>
+                        <p style="font-size: 0.9rem; margin: 0;">mihir-savla</p>
+                    </div>
                 </a>
                 <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i> Mumbai, India
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Location</strong>
+                        <p style="font-size: 0.9rem; margin: 0;">Mumbai, India</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <footer class="footer">
-        <p>© 2025 Mihir Savla. Built with passion for Linux & DevOps.</p>
+        <p>© 2025 Mihir Savla. Built with passion for infrastructure engineering and open-source technologies.</p>
     </footer>
-<script>
-// Mobile menu toggle
-const mobileMenuBtn = document.querySelector('.mobile-menu');
-const navLinksEl = document.querySelector('.nav-links');
-mobileMenuBtn.addEventListener('click', () => {
-    navLinksEl.classList.toggle('show');
-});
-</script>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const navLinksEl = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinksEl.classList.toggle('show');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksEl.classList.remove('show');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+    </script>
 </body>
 </html>

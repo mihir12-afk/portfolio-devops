@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mihir Savla – Blog</title>
+  <title>Mihir Savla – Blog | Linux & DevOps Insights</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -45,6 +45,7 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
       z-index: 1000;
+      transition: all 0.3s ease;
     }
 
     .nav-container {
@@ -73,32 +74,21 @@
       color: var(--text-secondary);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--accent-green);
     }
 
-    .home-btn {
-      margin: 100px 20px 20px 20px;
-      padding: 12px 24px;
-      background: var(--accent-green);
-      color: white;
+    .mobile-menu {
+      display: none;
+      background: none;
       border: none;
-      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 1.5rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-    }
-
-    .home-btn:hover {
-      background: #059669;
-      transform: translateY(-2px);
     }
 
     .blog-container {
@@ -111,6 +101,18 @@
     .blog-header {
       text-align: center;
       margin-bottom: 3rem;
+      animation: fadeInDown 0.6s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .blog-header h1 {
@@ -130,6 +132,32 @@
       margin: 0 auto;
     }
 
+    .filter-tags {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .filter-tag {
+      padding: 0.5rem 1rem;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .filter-tag:hover,
+    .filter-tag.active {
+      background: var(--accent-green);
+      color: white;
+      border-color: var(--accent-green);
+    }
+
     .blogs {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -144,6 +172,18 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .project-card::before {
@@ -159,6 +199,7 @@
     .project-card:hover {
       transform: translateY(-5px);
       border-color: var(--accent-green);
+      box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15);
     }
 
     .project-card h3 {
@@ -166,6 +207,37 @@
       color: var(--text-primary);
       margin-bottom: 1rem;
       line-height: 1.3;
+    }
+
+    .post-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .post-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .post-tag {
+      background: var(--bg-tertiary);
+      color: var(--accent-green);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.8rem;
+      border: 1px solid var(--border-color);
     }
 
     .project-card p {
@@ -178,6 +250,7 @@
     .project-links {
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .project-link {
@@ -261,26 +334,17 @@
       color: var(--text-secondary);
     }
 
-    @media screen and (max-width: 768px) {
-      .blog-container {
-        padding: 1rem;
-      }
-      
-      .blogs {
-        grid-template-columns: 1fr;
-      }
-
-      .home-btn {
-        margin: 80px 10px 20px 10px;
-      }
-
-      .blog-header h1 {
-        font-size: 2rem;
-      }
+    .footer {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      margin-top: 3rem;
+      color: var(--text-muted);
     }
-  
-@media (max-width: 768px) {
-    .nav-links {
+
+    @media screen and (max-width: 768px) {
+      .nav-links {
         flex-direction: column;
         background: rgba(15, 23, 42, 0.98);
         position: absolute;
@@ -290,17 +354,42 @@
         display: none;
         padding: 1rem 0;
         z-index: 999;
-    }
-    .nav-links.show {
+      }
+
+      .nav-links.show {
         display: flex;
-    }
-    .nav-links li {
+      }
+
+      .nav-links li {
         text-align: center;
         padding: 0.5rem 0;
-    }
-}
+      }
 
-</style>
+      .mobile-menu {
+        display: block;
+      }
+
+      .blog-container {
+        padding: 1rem;
+      }
+
+      .blogs {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-header h1 {
+        font-size: 2rem;
+      }
+
+      .filter-tags {
+        margin-top: 1.5rem;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 
 <body>
@@ -311,17 +400,22 @@
       <a href="index.html" class="logo">MS</a>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
+        <a href="blog.html" class="active">Blog</a>
         <a href="resume.html">Resume</a>
       </div>
     </div>
   </nav>
 
-
   <section class="blog-container">
     <div class="blog-header">
       <h1>My Blog</h1>
-      <p>Sharing insights, experiences, and learnings from my journey in Linux system administration and technology.</p>
+      <p>Sharing insights, experiences, and learnings from my journey in Linux system administration, DevOps, and technology.</p>
+      <div class="filter-tags">
+        <span class="filter-tag active" onclick="filterPosts('all')">All Posts</span>
+        <span class="filter-tag" onclick="filterPosts('linux')">Linux</span>
+        <span class="filter-tag" onclick="filterPosts('devops')">DevOps</span>
+        <span class="filter-tag" onclick="filterPosts('infrastructure')">Infrastructure</span>
+      </div>
     </div>
     <div id="blog-posts" class="blogs">
       <div class="loading-card">
@@ -331,10 +425,14 @@
     </div>
   </section>
 
+  <footer class="footer">
+    <p>&copy; 2025 Mihir Savla. Sharing knowledge about Linux, DevOps, and infrastructure engineering.</p>
+  </footer>
+
   <script>
     const blogContainer = document.getElementById('blog-posts');
+    let allPosts = [];
 
-    // Show loading state initially
     function showLoading() {
       blogContainer.innerHTML = `
         <div class="loading-card">
@@ -359,10 +457,65 @@
         <div class="empty-state">
           <i class="fas fa-pen-alt"></i>
           <h3>Blog Coming Soon</h3>
-          <p>I'm working on creating valuable content about Linux system administration, troubleshooting, and technology insights. Stay tuned!</p>
+          <p>I'm working on creating valuable content about Linux system administration, DevOps best practices, and infrastructure insights. Stay tuned!</p>
         </div>
       `;
     }
+
+    function filterPosts(category) {
+      const filterTags = document.querySelectorAll('.filter-tag');
+      filterTags.forEach(tag => tag.classList.remove('active'));
+      event.target.classList.add('active');
+
+      if (category === 'all') {
+        renderPosts(allPosts);
+      } else {
+        const filtered = allPosts.filter(post => 
+          post.tags && post.tags.some(tag => tag.toLowerCase().includes(category.toLowerCase()))
+        );
+        renderPosts(filtered);
+      }
+    }
+
+    function renderPosts(posts) {
+      blogContainer.innerHTML = '';
+
+      if (posts.length === 0) {
+        showEmptyState();
+        return;
+      }
+
+      posts.forEach((post, index) => {
+        const postDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+
+        const tags = post.tags ? post.tags.map(tag => `<span class="post-tag">${tag}</span>`).join('') : '';
+
+        const postCard = document.createElement('div');
+        postCard.className = 'project-card';
+        postCard.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s both`;
+        postCard.innerHTML = `
+          <h3>${post.title}</h3>
+          <div class="post-meta">
+            <span><i class="fas fa-calendar-alt"></i> ${postDate}</span>
+            <span><i class="fas fa-clock"></i> 5 min read</span>
+          </div>
+          ${tags ? `<div class="post-tags">${tags}</div>` : ''}
+          <p>${post.brief || 'Click to read the full article and discover more insights.'}</p>
+          <div class="project-links">
+            <a href="${post.url}" class="project-link" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-external-link-alt"></i> Read Article
+            </a>
+          </div>
+        `;
+        blogContainer.appendChild(postCard);
+      });
+    }
+
+    showLoading();
 
     // Fetch blog posts from Hashnode
     fetch("https://gql.hashnode.com/", {
@@ -405,11 +558,8 @@
       return res.json();
     })
     .then(data => {
-      // Clear loading state
-      blogContainer.innerHTML = '';
-      
       let postCount = 0;
-      
+
       if (data.data && data.data.user && data.data.user.publications.edges.length > 0) {
         const publications = data.data.user.publications.edges;
 
@@ -418,51 +568,51 @@
 
           posts.forEach(({ node: post }) => {
             postCount++;
-            const postDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
+            allPosts.push({
+              title: post.title,
+              brief: post.brief,
+              url: post.url,
+              publishedAt: post.publishedAt,
+              tags: post.tags.map(t => t.name)
             });
-
-            const postCard = document.createElement('div');
-            postCard.className = 'project-card';
-            postCard.innerHTML = `
-              <h3>${post.title}</h3>
-              <p>${post.brief || 'Click to read the full article and discover more insights.'}</p>
-              <div style="margin-bottom: 1rem;">
-                <small style="color: var(--text-muted);">
-                  <i class="fas fa-calendar-alt"></i> ${postDate}
-                </small>
-              </div>
-              <div class="project-links">
-                <a href="${post.url}" class="project-link" target="_blank" rel="noopener noreferrer">
-                  <i class="fas fa-external-link-alt"></i> Read Article
-                </a>
-              </div>
-            `;
-            blogContainer.appendChild(postCard);
           });
         });
       }
-      
-      // If no posts found, show empty state
+
       if (postCount === 0) {
         showEmptyState();
+      } else {
+        renderPosts(allPosts);
       }
     })
     .catch(error => {
       console.error('Error fetching blog posts:', error);
       showError();
     });
-  </script>
 
-<script>
-// Mobile menu toggle
-const mobileMenuBtn = document.querySelector('.mobile-menu');
-const navLinksEl = document.querySelector('.nav-links');
-mobileMenuBtn.addEventListener('click', () => {
-    navLinksEl.classList.toggle('show');
-});
-</script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu');
+    const navLinksEl = document.querySelector('.nav-links');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinksEl.classList.toggle('show');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksEl.classList.remove('show');
+      });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+      } else {
+        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+      }
+    });
+  </script>
 </body>
 </html>
