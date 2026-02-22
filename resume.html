@@ -229,6 +229,58 @@
             font-weight: 500;
         }
 
+        /* Company logo cards for experience timeline */
+        .experience-list {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .job-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            animation: fadeInUp 0.55s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.7);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+        }
+
+        .job-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        .company-logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: #f8fafc;
+            background: linear-gradient(135deg, #0f766e, #0f172a);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .job-card:hover .company-logo,
+        .company-logo:focus-visible {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.35);
+        }
+
+        .company-logo.newfold {
+            background: linear-gradient(135deg, #2563eb, #1e293b);
+        }
+
         .education-item {
             margin-bottom: 1.5rem;
         }
@@ -498,6 +550,24 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .job-brand {
+                width: 100%;
+            }
+
+            .job-card {
+                padding: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                max-width: 92%;
+            }
+
+            .job-card {
+                padding: 1.1rem;
+            }
         }
 
         html {
@@ -540,40 +610,50 @@
             </p>
         </div>
 
-        <div class="section">
+                <div class="section">
             <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
-            
-            <div class="job-header">
-                <div>
-                    <div class="job-title">Systems Engineer</div>
-                    <div class="job-company">Redswitches</div>
-                </div>
-                <div class="job-date">09/2025 – Present</div>
-            </div>
-            <ul>
-                <li>Managed 200+ Linux servers (RHEL, Ubuntu, AlmaLinux) across multiple global data centers, achieving 99.9% uptime.</li>
-                <li>Designed and maintained hardware/software RAID arrays via RAID controllers to ensure fault tolerance and data integrity.</li>
-                <li>Configured and tuned Nginx reverse proxies and load balancers for high-traffic workloads, improving request handling efficiency.</li>
-                <li>Automated patch management and monitoring workflows using Ansible and Bash, reducing manual effort by 40%.</li>
-                <li>Led root cause analysis (RCA) on system outages and implemented preventive measures.</li>
-                <li>Integrated Grafana + Prometheus dashboards for observability and capacity planning.</li>
-                <li>Partnered with DevOps teams to streamline deployments and CI/CD pipelines (Jenkins, GitHub Actions).</li>
-            </ul>
+            <div class="experience-list">
+                <article class="job-card">
+                    <div class="job-header">
+                        <div class="job-brand">
+                            <div class="company-logo" role="img" aria-label="Redswitches company logo">RS</div>
+                            <div>
+                                <div class="job-title">Systems Engineer</div>
+                                <div class="job-company">Redswitches</div>
+                            </div>
+                        </div>
+                        <div class="job-date">09/2025 – Present</div>
+                    </div>
+                    <ul>
+                        <li>Managed 200+ Linux servers (RHEL, Ubuntu, AlmaLinux) across multiple global data centers, achieving 99.9% uptime.</li>
+                        <li>Designed and maintained hardware/software RAID arrays via RAID controllers to ensure fault tolerance and data integrity.</li>
+                        <li>Configured and tuned Nginx reverse proxies and load balancers for high-traffic workloads, improving request handling efficiency.</li>
+                        <li>Automated patch management and monitoring workflows using Ansible and Bash, reducing manual effort by 40%.</li>
+                        <li>Led root cause analysis (RCA) on system outages and implemented preventive measures.</li>
+                        <li>Integrated Grafana + Prometheus dashboards for observability and capacity planning.</li>
+                        <li>Partnered with DevOps teams to streamline deployments and CI/CD pipelines (Jenkins, GitHub Actions).</li>
+                    </ul>
+                </article>
 
-            <br>
-            <div class="job-header">
-                <div>
-                    <div class="job-title">Product Support Associate</div>
-                    <div class="job-company">Newfold Digital</div>
-                </div>
-                <div class="job-date">05/2023 – 08/2025</div>
+                <article class="job-card">
+                    <div class="job-header">
+                        <div class="job-brand">
+                            <div class="company-logo newfold" role="img" aria-label="Newfold Digital company logo">ND</div>
+                            <div>
+                                <div class="job-title">Product Support Associate</div>
+                                <div class="job-company">Newfold Digital</div>
+                            </div>
+                        </div>
+                        <div class="job-date">05/2023 – 08/2025</div>
+                    </div>
+                    <ul>
+                        <li>Supported enterprise VPS environments (WHM/cPanel), troubleshooting PHP, Apache, MySQL, DNS, SSL, and email delivery issues.</li>
+                        <li>Tuned MySQL and Apache configurations to resolve performance bottlenecks.</li>
+                        <li>Hardened Linux servers via CSF, iptables, and proactive patching.</li>
+                        <li>Assisted in automated backup and recovery processes ensuring zero data loss across VPS clusters.</li>
+                    </ul>
+                </article>
             </div>
-            <ul>
-                <li>Supported enterprise VPS environments (WHM/cPanel), troubleshooting PHP, Apache, MySQL, DNS, SSL, and email delivery issues.</li>
-                <li>Tuned MySQL and Apache configurations to resolve performance bottlenecks.</li>
-                <li>Hardened Linux servers via CSF, iptables, and proactive patching.</li>
-                <li>Assisted in automated backup and recovery processes ensuring zero data loss across VPS clusters.</li>
-            </ul>
         </div>
 
         <div class="section">
