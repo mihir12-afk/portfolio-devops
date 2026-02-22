@@ -388,31 +388,37 @@
             outline-offset: 2px;
         }
 
-        .skills-detail-panel {
-            margin-top: 1.5rem;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(245, 158, 11, 0.12));
-            border: 1px solid rgba(16, 185, 129, 0.4);
+        /* Skill tooltip replaces previous bottom detail panel without reflow */
+        .skill-tooltip {
+            position: fixed;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px solid rgba(16, 185, 129, 0.5);
             border-radius: 0.8rem;
-            padding: 1rem 1.25rem;
-            min-height: 92px;
+            padding: 0.75rem 0.9rem;
+            box-shadow: 0 10px 24px rgba(2, 6, 23, 0.55);
+            pointer-events: none;
+            z-index: 1200;
+            opacity: 0;
+            transform: translateY(8px) scale(0.96);
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
 
-        .skills-detail-panel h3 {
+        .skill-tooltip.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .skill-tooltip h3 {
             color: var(--accent-green);
-            font-size: 1.1rem;
-            margin-bottom: 0.35rem;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
         }
 
-        .skills-detail-panel p {
+        .skill-tooltip p {
             color: var(--text-secondary);
-            font-size: 0.98rem;
-        }
-
-        .skills-help {
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
+            line-height: 1.4;
         }
 
         /* Certifications Section */
@@ -428,6 +434,9 @@
             border-radius: 1rem;
             overflow: hidden;
             transition: all 0.3s ease;
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
 
         .cert-card:hover {
@@ -441,10 +450,31 @@
             padding: 1rem;
             display: flex;
             align-items: flex-end;
+            justify-content: space-between;
+            gap: 0.75rem;
             background: linear-gradient(120deg, #0b1120, #1e293b, #0f766e);
             color: white;
             font-weight: 600;
             letter-spacing: 0.02em;
+        }
+
+        .cert-issuer-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(15, 23, 42, 0.45);
+            font-size: 0.95rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .cert-label {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.9);
         }
 
         .cert-content {
@@ -468,30 +498,6 @@
             font-size: 0.95rem;
         }
 
-        .cert-detail {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease;
-            color: var(--text-secondary);
-            font-size: 0.93rem;
-            margin-top: 0;
-        }
-
-        .cert-card.active .cert-detail {
-            max-height: 100px;
-            margin-top: 0.6rem;
-        }
-
-        .cert-toggle {
-            margin-top: 0.8rem;
-            border: 1px solid var(--accent-green);
-            background: transparent;
-            color: var(--accent-green);
-            padding: 0.45rem 0.75rem;
-            border-radius: 0.45rem;
-            cursor: pointer;
-            font-weight: 600;
-        }
 
         /* Projects Section */
         .projects-grid {
@@ -962,47 +968,64 @@
                 </div>
             </div>
         </div>
-        <div class="skills-detail-panel" id="skills-detail-panel" aria-live="polite">
-            <h3 id="skill-detail-title">Tap or hover a skill</h3>
-            <p id="skill-detail-text">Select any skill to see a short, recruiter-friendly summary of experience and strengths in that area.</p>
+        <div class="skill-tooltip" id="skill-tooltip" role="status" aria-live="polite" aria-hidden="true">
+            <h3 id="skill-tooltip-title"></h3>
+            <p id="skill-tooltip-text"></p>
         </div>
-        <p class="skills-help">Tip: On desktop, hover to preview. On mobile, tap a skill chip to keep the description open.</p>
     </section>
 
     <!-- Certifications Section -->
     <section id="certifications" class="section fade-in">
         <h2 class="section-title">Certifications</h2>
         <div class="certifications-grid">
-            <article class="cert-card">
-                <div class="cert-preview">Linux Administration Mastery</div>
-                <div class="cert-content">
-                    <h3>Advanced Linux Administration</h3>
-                    <p class="cert-meta">Udemy • 2024</p>
-                    <p class="cert-summary">Hands-on training in Linux operations, system hardening, and infrastructure troubleshooting.</p>
-                    <button class="cert-toggle" type="button">Preview Learnings</button>
-                    <p class="cert-detail">Focused on package/service management, troubleshooting incidents, and performance optimization best practices.</p>
+            <a class="cert-card" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=24076F55078821A79070793167A986D30C91AE216F6E6AB2C30FA5EFC22C1F17" target="_blank" rel="noopener noreferrer" aria-label="Open Oracle Cloud Infrastructure 2025 Foundations Associate certificate">
+                <div class="cert-preview">
+                    <span>Oracle Certification</span>
+                    <span class="cert-issuer-logo" aria-hidden="true">OR</span>
                 </div>
-            </article>
-            <article class="cert-card">
-                <div class="cert-preview">Observability & Monitoring</div>
                 <div class="cert-content">
-                    <h3>Prometheus + Grafana in Production</h3>
-                    <p class="cert-meta">Coursera • 2024</p>
-                    <p class="cert-summary">Built alert-driven monitoring stacks with dashboarding, metrics strategy, and service visibility.</p>
-                    <button class="cert-toggle" type="button">Preview Learnings</button>
-                    <p class="cert-detail">Included metric instrumentation, alert thresholds, and dashboard storytelling for technical and business stakeholders.</p>
+                    <h3>Oracle Cloud Infrastructure 2025 Foundations Associate</h3>
+                    <p class="cert-meta">Oracle</p>
+                    <p class="cert-summary">Official OCI foundations certification validating cloud fundamentals and core Oracle Cloud services knowledge.</p>
+                    <p class="cert-label">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></p>
                 </div>
-            </article>
-            <article class="cert-card">
-                <div class="cert-preview">Automation & CI/CD Foundations</div>
+            </a>
+            <a class="cert-card" href="https://drive.google.com/file/d/1SbW7AazpRI8bD_8wJFC20CnXeVCS3kRz/view" target="_blank" rel="noopener noreferrer" aria-label="Open CWSA-1 by cPanel certificate">
+                <div class="cert-preview">
+                    <span>cPanel Certification</span>
+                    <span class="cert-issuer-logo" aria-hidden="true">cP</span>
+                </div>
                 <div class="cert-content">
-                    <h3>DevOps Automation Essentials</h3>
-                    <p class="cert-meta">Great Learning • 2023</p>
-                    <p class="cert-summary">Automation-first certification for scripting, delivery pipelines, and repeatable infrastructure workflows.</p>
-                    <button class="cert-toggle" type="button">Preview Learnings</button>
-                    <p class="cert-detail">Covered shell/Python automation, CI/CD basics, and release reliability patterns for production engineering teams.</p>
+                    <h3>CWSA-1 by cPanel</h3>
+                    <p class="cert-meta">cPanel</p>
+                    <p class="cert-summary">Certified Web Services Administrator credential focused on Linux hosting administration and panel operations.</p>
+                    <p class="cert-label">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></p>
                 </div>
-            </article>
+            </a>
+            <a class="cert-card" href="https://drive.google.com/file/d/1foHAvAEDMDyT6u8t0XfzB7eQ-fE69sie/view" target="_blank" rel="noopener noreferrer" aria-label="Open CWSA-2 by cPanel certificate">
+                <div class="cert-preview">
+                    <span>cPanel Certification</span>
+                    <span class="cert-issuer-logo" aria-hidden="true">cP</span>
+                </div>
+                <div class="cert-content">
+                    <h3>CWSA-2 by cPanel</h3>
+                    <p class="cert-meta">cPanel</p>
+                    <p class="cert-summary">Advanced CWSA certification demonstrating deeper competency in platform administration and service reliability.</p>
+                    <p class="cert-label">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></p>
+                </div>
+            </a>
+            <a class="cert-card" href="https://drive.google.com/file/d/1mrw9CaVxrmb9-TF8GZtri45ZfnG0z9Ng/view" target="_blank" rel="noopener noreferrer" aria-label="Open The Joy of Computing Using Python - NPTEL certificate">
+                <div class="cert-preview">
+                    <span>NPTEL Certification</span>
+                    <span class="cert-issuer-logo" aria-hidden="true">NP</span>
+                </div>
+                <div class="cert-content">
+                    <h3>The Joy of Computing Using Python – NPTEL</h3>
+                    <p class="cert-meta">NPTEL</p>
+                    <p class="cert-summary">NPTEL program completion covering Python problem-solving, computational thinking, and practical coding foundations.</p>
+                    <p class="cert-label">View Certificate <i class="fas fa-external-link-alt" aria-hidden="true"></i></p>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -1236,31 +1259,56 @@
 
         typeEffect();
 
-        // Interactive skills detail preview
+        // Skills tooltip interaction (replaces bottom detail panel without page reflow)
         const skillTags = document.querySelectorAll('.skill-tag');
-        const skillDetailTitle = document.getElementById('skill-detail-title');
-        const skillDetailText = document.getElementById('skill-detail-text');
+        const skillTooltip = document.getElementById('skill-tooltip');
+        const skillTooltipTitle = document.getElementById('skill-tooltip-title');
+        const skillTooltipText = document.getElementById('skill-tooltip-text');
 
-        function updateSkillPreview(tag) {
+        function showSkillTooltip(tag) {
             if (!tag) return;
-            skillDetailTitle.textContent = tag.dataset.skillTitle;
-            skillDetailText.textContent = tag.dataset.skillDesc;
+            skillTooltipTitle.textContent = tag.dataset.skillTitle;
+            skillTooltipText.textContent = tag.dataset.skillDesc;
+            skillTooltip.classList.add('show');
+            skillTooltip.setAttribute('aria-hidden', 'false');
+            positionSkillTooltip(tag);
+        }
+
+        function hideSkillTooltip() {
+            skillTooltip.classList.remove('show');
+            skillTooltip.setAttribute('aria-hidden', 'true');
+        }
+
+        function positionSkillTooltip(tag) {
+            const rect = tag.getBoundingClientRect();
+            const tooltipRect = skillTooltip.getBoundingClientRect();
+            const gap = 12;
+            let top = rect.top - tooltipRect.height - gap;
+            let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+
+            if (top < gap) top = rect.bottom + gap;
+            if (left < gap) left = gap;
+            if (left + tooltipRect.width > window.innerWidth - gap) {
+                left = window.innerWidth - tooltipRect.width - gap;
+            }
+
+            skillTooltip.style.top = `${top}px`;
+            skillTooltip.style.left = `${left}px`;
         }
 
         skillTags.forEach(tag => {
-            tag.addEventListener('mouseenter', () => updateSkillPreview(tag));
-            tag.addEventListener('focus', () => updateSkillPreview(tag));
-            tag.addEventListener('click', () => updateSkillPreview(tag));
+            tag.addEventListener('mouseenter', () => showSkillTooltip(tag));
+            tag.addEventListener('focus', () => showSkillTooltip(tag));
+            tag.addEventListener('mousemove', () => positionSkillTooltip(tag));
+            tag.addEventListener('mouseleave', hideSkillTooltip);
+            tag.addEventListener('blur', hideSkillTooltip);
         });
 
-        // Certification card interaction for tap/keyboard users
-        const certCards = document.querySelectorAll('.cert-card');
-        certCards.forEach(card => {
-            const button = card.querySelector('.cert-toggle');
-            button.addEventListener('click', () => {
-                const isActive = card.classList.toggle('active');
-                button.textContent = isActive ? 'Hide Preview' : 'Preview Learnings';
-            });
+        window.addEventListener('scroll', hideSkillTooltip, { passive: true });
+        window.addEventListener('resize', hideSkillTooltip);
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') hideSkillTooltip();
         });
 
         // Fade in animation on scroll
