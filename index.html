@@ -392,6 +392,7 @@
         .skill-tooltip {
             position: fixed;
             max-width: 320px;
+            width: min(320px, calc(100vw - 24px));
             background: rgba(15, 23, 42, 0.98);
             border: 1px solid rgba(16, 185, 129, 0.5);
             border-radius: 0.8rem;
@@ -825,7 +826,7 @@
 
         .fade-in.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: none;
         }
     </style>
 </head>
@@ -1265,6 +1266,12 @@
         const skillTooltipTitle = document.getElementById('skill-tooltip-title');
         const skillTooltipText = document.getElementById('skill-tooltip-text');
 
+        // Keep tooltip attached to body so any transformed parent section
+        // does not break fixed positioning math.
+        if (skillTooltip && skillTooltip.parentElement !== document.body) {
+            document.body.appendChild(skillTooltip);
+        }
+
         function showSkillTooltip(tag) {
             if (!tag) return;
             skillTooltipTitle.textContent = tag.dataset.skillTitle;
@@ -1290,6 +1297,10 @@
             if (left < gap) left = gap;
             if (left + tooltipRect.width > window.innerWidth - gap) {
                 left = window.innerWidth - tooltipRect.width - gap;
+            }
+
+            if (top + tooltipRect.height > window.innerHeight - gap) {
+                top = Math.max(gap, rect.top - tooltipRect.height - gap);
             }
 
             skillTooltip.style.top = `${top}px`;
